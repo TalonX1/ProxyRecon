@@ -1,0 +1,30 @@
+# io config
+input_pcd_path: "data/ct_1_building_segment.xyz"
+inst_scalar: true
+output_inst_color: true
+
+save_path: "ct_1_inst_convexhull"
+obj_save_path: "ct_1_inst_convexhull.obj"
+footprint_save_path: ""
+ground_segment_pcd_save_path: 'ground_segment.xyz'
+building_segment_pcd_save_path: 'building_segment.xyz'
+color_file_path: 'color.txt'
+
+boundary_mode: "alpha-shape"
+output_boundary_path: "ct_1_inst_boundary.txt"
+
+# dbscan
+need_cluster: false
+segment_z : 4
+dbscan_eps: 6
+dbscan_min_points: 100
+
+# layer config
+layer_num: 30
+layer_mode: "convex-hull"
+area_threshold: 1.1
+ground_z: 0
+
+
+
+
