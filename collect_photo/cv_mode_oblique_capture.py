@@ -317,7 +317,7 @@ class CvPathPlanner:
             lines = log_file.readlines()
 
             for line in lines:
-                if line.strip():  # 检查非空行
+                if line.strip():
                     parts = line.split(',')  # UE
                     formatted_line = (
                         f"{parts[0]},"

@@ -28,8 +28,8 @@ class Mesh:
         self.output_inst_color = output_inst_color
         self.one_building_inst_color = one_building_inst_color
 
-        self.xy2_global_idx = {}            # 坐标点到全局索引的字典映射{[x,y]:idx}，用于构建拓扑
-        self.faces_global_index = faces_global_index  # 面片存储开始索引
+        self.xy2_global_idx = {}
+        self.faces_global_index = faces_global_index
         self.obj = None
 
         # 构建footprint文件
@@ -68,10 +68,6 @@ class Mesh:
             self.footprint_xy.append(np.delete(self.layer.main_layer_shape_xyz0[i], 2, 1))
 
     def none_triangulation_mesh(self):
-        # 添加顶点
-        # self.layer.stack_poly_shape_xyz0 为ndarray,内容为层+点
-        # for poly in range(len(self.layer.stack_poly_shape_xyz0)):
-
         vertex = []
         facade = []
         roof = []
@@ -85,13 +81,13 @@ class Mesh:
             roof_index.append(roof_index[-1] + 2 * self.layer.poly_points_num[poly])
 
         for poly in range(len(self.layer.stack_poly_shape_xyz0)):
-            start_index = roof_index[poly] + self.faces_global_index                         # 每一个多边形的初始索引
-            one_roof_face = []                                                                    # 一个顶面
+            start_index = roof_index[poly] + self.faces_global_index
+            one_roof_face = []
             for point in range(len(self.layer.stack_poly_shape_xyz0[poly])):
                 one_facade_face = []
-                one_roof_face.append(start_index + point + 1)                                     # 顶部面片构造
+                one_roof_face.append(start_index + point + 1)
                 # 如果不是最后一个点
-                if point + 1 != len(self.layer.stack_poly_shape_xyz0[poly]):                      # 侧面面片构造
+                if point + 1 != len(self.layer.stack_poly_shape_xyz0[poly]):
                     one_facade_face.append(start_index + point + 1)
                     one_facade_face.append(
                         start_index + point + len(self.layer.stack_poly_shape_xyz0[poly]) + 1)
